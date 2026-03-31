@@ -1,0 +1,99 @@
+# 🔐 Environment variables
+.env
+.env.*
+*.env
+
+# 🐍 Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# 🧠 Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# 📦 Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 📊 Logs
+*.log
+logs/
+
+# 🧪 Testing
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+
+# 📁 Jupyter Notebook
+.ipynb_checkpoints
+
+# 🧠 LangChain / LangGraph cache
+.chroma/
+chroma/
+vectorstore/
+faiss_index/
+*.faiss
+*.pkl
+
+# 🧠 Embeddings / RAG data
+data/
+documents/
+uploads/
+
+# 🗂️ Temporary files
+*.tmp
+*.temp
+*.swp
+.DS_Store
+
+# 🖥️ VS Code
+.vscode/
+
+# 🧰 IDEs
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 🌐 Gradio temp
+gradio_cached_examples/
+gradio_tmp/
+
+# 🔑 API keys / secrets
+secrets.json
+credentials.json
+
+# 📦 Node (if frontend included)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🐳 Docker
+*.pid
+*.seed
+*.pid.lock
+
+# 🧾 OS files
+Thumbs.db

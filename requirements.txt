@@ -1,0 +1,35 @@
+# Core LLM + Agents
+langchain
+langgraph
+openai
+langchain-openai
+langchain-community
+
+# RAG (Retrieval Augmented Generation)
+chromadb
+faiss-cpu
+tiktoken
+
+# Embeddings
+sentence-transformers
+
+# Document Loaders / Parsing
+pypdf
+unstructured
+
+# API / Backend (optional but useful)
+fastapi
+uvicorn
+
+# UI (for demo)
+gradio
+
+# Multi-model support (optional - install only if needed)
+google-generativeai
+langchain-groq
+langchain-ollama
+
+# Utilities
+python-dotenv
+ipython
+ipykernel
