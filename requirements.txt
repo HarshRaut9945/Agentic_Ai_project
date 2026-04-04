@@ -1,35 +1,39 @@
-# Core LLM + Agents
-langchain
-langgraph
-openai
-langchain-openai
-langchain-community
+# -----------------------------
+# Core LangChain (STABLE)
+# -----------------------------
+langchain==0.1.20
+langchain-community==0.0.38
+langchain-core==0.1.52
 
-# RAG (Retrieval Augmented Generation)
-chromadb
-faiss-cpu
-tiktoken
+# -----------------------------
+# Gemini / Google LLM (FIXED)
+# -----------------------------
+langchain-google-genai==1.0.3
+google-generativeai==0.5.4   # ✅ FIXED (compatible version)
 
-# Embeddings
-sentence-transformers
+# -----------------------------
+# UI
+# -----------------------------
+streamlit==1.33.0
+gradio==4.31.5
 
-# Document Loaders / Parsing
-pypdf
-unstructured
+# -----------------------------
+# Tools (Search / APIs)
+# -----------------------------
+duckduckgo-search
+ddgs
+youtube-search-python==1.6.6
+newsapi-python==0.2.7
 
-# API / Backend (optional but useful)
-fastapi
-uvicorn
-
-# UI (for demo)
-gradio
-
-# Multi-model support (optional - install only if needed)
-google-generativeai
-langchain-groq
-langchain-ollama
-
+# -----------------------------
 # Utilities
-python-dotenv
-ipython
-ipykernel
+# -----------------------------
+requests==2.31.0
+python-dotenv==1.0.1
+ipython==8.22.2
+ipykernel==6.29.4
+
+# -----------------------------
+# IMPORTANT (Fix NumPy error)
+# -----------------------------
+numpy==1.26.4
