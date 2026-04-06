@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- Makes website responsive on mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Voice Assistant</title>
+
+<style>
+
+/* ===== Body Styling ===== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2); /* Gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    margin: 0;
+    color: white;
+}
+
+/* ===== Main Container ===== */
+.container {
+    width: 400px;
+    background: rgba(255,255,255,0.1); /* Glass effect */
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* ===== Heading ===== */
+h1 {
+    margin-bottom: 10px;
+}
+
+/* ===== Microphone Button ===== */
+.mic-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Circular button */
+    border: none;
+    font-size: 30px;
+    background: #ff4b5c;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+.mic-btn:hover {
+    transform: scale(1.1);
+}
+
+/* When listening (animation added via JS) */
+.listening {
+    animation: pulse 1s infinite;
+}
+
+/* Pulse animation for mic */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,75,92,0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(255,75,92,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,75,92,0); }
+}
+
+/* Response text styling */
+#response-text {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Conversation history container */
+#conversation-history {
+    margin-top: 20px;
+    max-height: 250px;
+    overflow-y: auto; /* Scroll if overflow */
+    text-align: left;
+}
+
+/* Each message block */
+.history-entry {
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== Main UI Container ===== -->
+<div class="container">
+    <h1>🎙 AI Assistant</h1>
+
+    <!-- Mic button to start voice recognition -->
+    <button id="start-record-btn" class="mic-btn">🎤</button>
+
+    <!-- Shows current response -->
+    <div id="response-text"></div>
+
+    <!-- Shows conversation history -->
+    <div id="conversation-history"></div>
+</div>
+
+<script>
+
+// ===== DOM Elements =====
+const btn = document.getElementById("start-record-btn");
+const responseText = document.getElementById("response-text");
+const historyDiv = document.getElementById("conversation-history");
+
+// ===== Speech Recognition Setup =====
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+// ===== When user clicks mic button =====
+btn.onclick = () => {
+    recognition.start(); // Start listening
+    btn.classList.add("listening"); // Add animation
+};
+
+// ===== When speech is detected =====
+recognition.onresult = async (event) => {
+    recognition.stop();
+
+    // Get spoken text
+    const text = event.results[0][0].transcript;
+
+    // Show user input
+    responseText.innerHTML = "You said: " + text;
+
+    // Send data to Flask backend
+    const res = await fetch("/process_voice", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ user_input: text })
+    });
+
+    // Get response from server
+    const data = await res.json();
+
+    // Show AI response
+    responseText.innerHTML = "AI: " + data.response;
+
+    // Update chat history UI
+    updateHistory(data.conversation_history);
+
+    // Speak AI response
+    speak(data.response);
+
+    // Stop animation
+    btn.classList.remove("listening");
+};
+
+// ===== Function to update chat history =====
+function updateHistory(history) {
+
+    // Clear old history
+    historyDiv.innerHTML = "";
+
+    // Loop through conversation array
+    history.forEach(item => {
+
+        const div = document.createElement("div");
+        div.className = "history-entry";
+
+        // Add user + AI messages
+        div.innerHTML = `
+            <b>You:</b> ${item.user}<br>
+            <b>AI:</b> ${item.ai}
+        `;
+
+        historyDiv.appendChild(div);
+    });
+}
+
+// ===== Text to Speech =====
+function speak(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-US"; // Language setting
+
+    window.speechSynthesis.speak(speech);
+}
+
+</script>
+
+</body>
+</html>
