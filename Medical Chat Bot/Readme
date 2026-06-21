@@ -1,0 +1,244 @@
+# 🩺 Medical Chatbot using RAG, FAISS & Gemini
+
+A Retrieval-Augmented Generation (RAG) based Medical Chatbot that answers medical questions using information extracted from medical PDF documents. The application uses Google Gemini for response generation, FAISS for vector search, and Sentence Transformers for embeddings.
+
+---
+
+## 🚀 Features
+
+* 📄 Load and process multiple PDF documents
+* ✂️ Automatic text chunking for efficient retrieval
+* 🔍 Semantic search using FAISS vector database
+* 🤖 Google Gemini powered responses
+* 🧠 Retrieval-Augmented Generation (RAG)
+* 🌐 Flask-based web application
+* 💬 Interactive chatbot interface
+* ⚡ Fast local inference and retrieval
+
+---
+
+## 🏗️ Project Architecture
+
+PDF Documents
+↓
+Document Loader
+↓
+Text Chunking
+↓
+Sentence Transformer Embeddings
+↓
+FAISS Vector Store
+↓
+Retriever
+↓
+Google Gemini LLM
+↓
+Flask Web Application
+
+---
+
+## 📂 Project Structure
+
+```bash
+Medical Chat Bot/
+│
+├── data/
+│   └── medical_book.pdf
+│
+├── faiss_index/
+│   ├── index.faiss
+│   └── index.pkl
+│
+├── src/
+│   ├── helper.py
+│   └── prompt.py
+│
+├── static/
+│   └── style.css
+│
+├── templates/
+│   └── chat.html
+│
+├── app.py
+├── store_index.py
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Python
+* Flask
+
+### LLM
+
+* Google Gemini 2.5 Flash
+
+### Vector Database
+
+* FAISS
+
+### Embedding Model
+
+* sentence-transformers/all-MiniLM-L6-v2
+
+### AI Framework
+
+* LangChain
+
+### PDF Processing
+
+* PyPDF
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/medical-chatbot.git
+
+cd medical-chatbot
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+### Activate Environment
+
+#### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+#### Linux / Mac
+
+```bash
+source .venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file:
+
+```env
+GOOGLE_API_KEY=your_google_api_key
+```
+
+---
+
+## 📚 Build Vector Database
+
+Place your medical PDF files inside the `data/` folder.
+
+Run:
+
+```bash
+python store_index.py
+```
+
+This will:
+
+* Load PDF files
+* Split text into chunks
+* Generate embeddings
+* Create FAISS vector database
+* Save index locally
+
+---
+
+## ▶️ Run Application
+
+```bash
+python app.py
+```
+
+Application will start at:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## 💡 Example Questions
+
+* What is diabetes?
+* What are the symptoms of hypertension?
+* What causes asthma?
+* How is anemia treated?
+* What are the side effects of paracetamol?
+
+---
+
+## 🔍 How It Works
+
+1. Medical PDFs are loaded from the data folder.
+2. Documents are split into smaller chunks.
+3. Sentence Transformer generates vector embeddings.
+4. FAISS stores embeddings for semantic search.
+5. User asks a question.
+6. Relevant chunks are retrieved from FAISS.
+7. Retrieved context is passed to Gemini.
+8. Gemini generates a context-aware answer.
+9. Response is displayed in the chatbot interface.
+
+---
+
+## 📈 Future Improvements
+
+* Source citations with answers
+* Conversation memory
+* Multi-PDF knowledge base
+* Medical image support
+* Voice input/output
+* Authentication system
+* Deployment on AWS/Render
+
+---
+
+## 🎯 Learning Outcomes
+
+Through this project, I learned:
+
+* Retrieval-Augmented Generation (RAG)
+* Vector Databases (FAISS)
+* Embedding Models
+* Semantic Search
+* LangChain
+* Google Gemini Integration
+* Flask Development
+* PDF Processing Pipelines
+* Building End-to-End AI Applications
+
+---
+
+## 👨‍💻 Author
+
+Harsha Raut
+
+Computer Science & Design Engineering Student
+
+Interested in AI, GenAI, Data Analytics, and Cloud Technologies.
+
+---
+
+## 📜 License
+
+This project is developed for educational and learning purposes.
